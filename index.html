@@ -7393,7 +7393,7 @@ you.ai = function(){
 function Creature(){
   this.name='Nothing';
   this.desc='Empty space';
-  this.type = 3; //h,b,u,e,p,d
+  this.type = 3; //human,beast,undead,enemy,phantom,dragon
   this.id = 0;
   this.lvl=1;
   this.exp=1;
@@ -7461,25 +7461,25 @@ function Creature(){
   }
 } creature.default = new Creature(); global.current_m = creature.default;
 
-creature.bat = new Creature(); 
+creature.bat = new Creature(); //enemy info
 creature.bat.name = 'Bat'; creature.bat.id = 101;
 creature.bat.desc = 'Aggressive little bats living in the dark';
-creature.bat.type = 1;
-creature.bat.exp = 8;
-creature.bat.hp_r = 39;
+creature.bat.type = 1;  //human,beast,undead,enemy,phantom,dragon (starts at)
+creature.bat.exp = 8;   //exp, dependent on level
+creature.bat.hp_r = 39;  //hp at level 1, is only affected by per-level stats.
 creature.bat.blood = .0852;
-creature.bat.stat_p=[.5,1,1.5,.5];
-creature.bat.aff = [-5,25,-5,-5,10,-5,5];
-creature.bat.cls = [-4,-7,-3];
-creature.bat.eqp[0].aff = [0,12,-10,0,0,-5,5];
-creature.bat.eqp[0].cls = [1,1,0];
+creature.bat.stat_p=[.5,1,1.5,.5];   // stats per level
+creature.bat.aff = [-5,25,-5,-5,10,-5,5];  //elemental defense     physical air earth fire water light dark
+creature.bat.cls = [-4,-7,-3];          // Edge, Pierce, blunt, defense
+creature.bat.eqp[0].aff = [0,12,-10,0,0,-5,5];  //elemental offense
+creature.bat.eqp[0].cls = [1,1,0];   //e,p,b, offense
 creature.bat.atype = 1; creature.bat.ctype = 1;
-creature.bat.str_r = 2;
+creature.bat.str_r = 2; //stats at level 1
 creature.bat.agl_r = 10;
 creature.bat.spd_r = 2;
 creature.bat.drop =[{item:item.sbone,chance:.1},{item:item.appl,chance:.06}];
-creature.bat.rnk = 3;
-creature.bat.pts = 6;
+creature.bat.rnk = 3; //rank, up to SSS++ at 39
+creature.bat.pts = 6; //no clue
 
 creature.cbat = new Creature(); creature.cbat.id = 109;
 creature.cbat.name = 'Cave bat';
@@ -11528,6 +11528,25 @@ function Chs(){
   this.sector=[]
 }
 
+
+//map, zones, areas, etc.
+
+// how to make a basic zone.
+//chss.area5 = new Chs(); chss.area5.id = 888; addtosector(sector.vcent,chss.area5); addtosector(sector.vmain1,chss.area5)
+//chss.area5.sl=()=>{global.flags.inside=false; d_loc('Shadow Realm'); global.lst_loc = 888;
+//chss.area5.onEnter=function(){
+//  area_init(area.area5c);
+//};
+//chs('"=> Go back"',false).addEventListener('click',()=>{  
+//   smove(chss.lsmain1,false);
+// });
+
+// how to make a basic area, where combat takes place
+//area.area5c = new Area(); area.area5c.id = 119;
+//area.area5c.name = 'Training Grounds';
+//area.area5c.pop = [{crt:creature.frostpixie,lvlmin:1,lvlmax:3,c:1}];
+//area.area5c.size = 10; z_bake(area.area5c);
+//area.area5c.onEnd = function(){ smove(chss.area5,false)}
 
 chss.t1 = new Chs(); chss.t1.id = 101; 
 chss.t1.sl=function(){ global.lst_loc = 101; global.flags.inside=true; d_loc('Dojo, training area');
