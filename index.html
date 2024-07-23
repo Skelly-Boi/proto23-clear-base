@@ -1415,7 +1415,7 @@ effect.fbite.use = function(){
     effect.fplc.active===true?this.duration-=5:this.duration--;
     if(random()<.3){
       giveSkExp(skl.painr,rand(0.2,1));
-      if(you.hp>50) you.hp-=(rand(5,20)); dom.d5_1_1.update();
+      if(you.hp>0) you.hp-=(rand(10,50)*(1-(skl.coldr.use*5))*res.frost); dom.d5_1_1.update();
     }
   }
   else this.duration--; if(this.duration>900) this.duration=900;
@@ -2042,42 +2042,42 @@ skl.abw = new Skill(); skl.abw.id = 135; skl.abw.type=7;
 skl.abw.name = 'Water Absorption'; skl.abw.sp='0.66em';
 skl.abw.desc = 'Ability to absorb Water Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Reduces energy loss when wet<br>Provides minor protection from water-based attacks</small>';
 skl.abw.use=function(x,y){return this.lvl}
-skl.abw.onLevel=function(){you.cmaff[3]+=Math.ceil(this.lvl/3+1)}
+skl.abw.onLevel=function(){you.aff[4]+=Math.ceil(this.lvl/3+1)}
 skl.abw.onGive=function(x){if(!you.ki['w'])you.ki['w']=x; else you.ki['w']+=x}
 
 skl.abf = new Skill(); skl.abf.id = 136; skl.abf.type=7;
 skl.abf.name = 'Fire Absorption';  skl.abf.sp='0.66em';
 skl.abf.desc = 'Ability to absorb Fire Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Provides minor protection from fire-based attacks</small>';
 skl.abf.use=function(x,y){return this.lvl}
-skl.abf.onLevel=function(){you.cmaff[4]+=Math.ceil(this.lvl/3+1)}
+skl.abf.onLevel=function(){you.aff[3]+=Math.ceil(this.lvl/3+1)}
 skl.abf.onGive=function(x){if(!you.ki['f'])you.ki['f']=x; else you.ki['f']+=x}
 
 skl.aba = new Skill(); skl.aba.id = 137; skl.aba.type=7;
 skl.aba.name = 'Air Absorption';  skl.aba.sp='0.66em';
 skl.aba.desc = 'Ability to absorb Air Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Provides minor protection from air-based attacks</small>';
 skl.aba.use=function(x,y){return this.lvl}
-skl.aba.onLevel=function(){you.cmaff[1]+=Math.ceil(this.lvl/3+1)}
+skl.aba.onLevel=function(){you.aff[1]+=Math.ceil(this.lvl/3+1)}
 skl.aba.onGive=function(x){if(!you.ki['a'])you.ki['a']=x; else you.ki['a']+=x}
 
 skl.abe = new Skill(); skl.abe.id = 138; skl.abe.type=7;
 skl.abe.name = 'Earth Absorption';  skl.abe.sp='0.66em';
 skl.abe.desc = 'Ability to absorb Earth Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Provides minor protection from earth-based attacks</small>';
 skl.abe.use=function(x,y){return this.lvl}
-skl.abe.onLevel=function(){you.cmaff[2]+=Math.ceil(this.lvl/3+1)}
+skl.abe.onLevel=function(){you.aff[2]+=Math.ceil(this.lvl/3+1)}
 skl.abe.onGive=function(x){if(!you.ki['e'])you.ki['e']=x; else you.ki['e']+=x}
 
 skl.abl = new Skill(); skl.abl.id = 139; skl.abl.type=7;
 skl.abl.name = 'Light Absorption';  skl.abl.sp='0.66em';
 skl.abl.desc = 'Ability to absorb Holy Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Provides minor protection from holy attacks</small>';
 skl.abl.use=function(x,y){return this.lvl}
-skl.abl.onLevel=function(){you.cmaff[5]+=Math.ceil(this.lvl/3+1)}
+skl.abl.onLevel=function(){you.aff[5]+=Math.ceil(this.lvl/3+1)}  
 skl.abl.onGive=function(x){if(!you.ki['l'])you.ki['l']=x; else you.ki['l']+=x}
 
 skl.abd = new Skill(); skl.abd.id = 140; skl.abd.type=7;
 skl.abd.name = 'Dark Absorption';  skl.abd.sp='0.66em';
 skl.abd.desc = 'Ability to absorb Dark Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Provides minor protection from Dark attacks</small>';
 skl.abd.use=function(x,y){return this.lvl}
-skl.abd.onLevel=function(){you.cmaff[6]+=Math.ceil(this.lvl/3+1)}
+skl.abd.onLevel=function(){you.aff[6]+=Math.ceil(this.lvl/3+1)}
 skl.abd.onGive=function(x){if(!you.ki['d'])you.ki['d']=x; else you.ki['d']+=x}
 
 skl.hvt = new Skill(); skl.hvt.id = 141; skl.hvt.type=8;
@@ -2136,7 +2136,7 @@ skl.tghs = new Skill(); skl.tghs.id = 151; skl.tghs.type=2;
 skl.tghs.name = 'Toughness';
 skl.tghs.desc = 'Durability of one\'s body'+dom.dseparator+'<small style="color:darkorange">Slightly improves physical defence</small>';
 skl.tghs.use=function(x,y){return this.lvl}
-skl.tghs.onLevel=function(){you.cmaff[0]+=Math.ceil(this.lvl/3+1)}
+skl.tghs.onLevel=function(){you.aff[0]+=Math.ceil(this.lvl/3+1)}
 
 skl.drka = new Skill(); skl.drka.id = 152; skl.drka.type=4;
 skl.drka.name = 'Drinking';
@@ -2181,6 +2181,13 @@ skl.coldr = new Skill(); skl.coldr.id = 160; skl.coldr.type=6;
 skl.coldr.name = 'Cold Resistance'; skl.coldr.sp='.66em';
 skl.coldr.desc = 'Ability to tolerate harsh and cold temperatures'+dom.dseparator+'<small style="color:darkorange">Slightly decreases energy loss when cold</small>';
 skl.coldr.use=function(x,y){return this.lvl*.004}
+skl.coldr.mlstn=[{lv:1,f:()=>{you.hpa+=20;you.stat_r()},g:false,p:"HP +20"},
+
+              {lv:3,f:()=>{you.hpa+=25;skl.painr.p+=.15;skl.tghs.p+=.1;you.stat_r()},g:false,p:"HP + 25, Pain Resistance EXP Gain +15%, Toughness EXP Gain +10%"},
+
+              {lv:5,f:()=>{you.eqp_t+=.05;skl.tghs.p+=.1;you.stat_r()},g:false,p:"EXP Gain +5%, Toughness EXP Gain +10%"}, 
+
+              ];
 
 ///////////////////////////////////////////
 //ITM
@@ -5499,7 +5506,7 @@ item.skl3a.name = '"Axeman Manual"'; item.skl3a.rar=2;
 item.skl3a.desc = 'Technique book full of fundamental knowledge about axefighting'+dom.dseparator+'<span style="color:deeppink">Axe Mastery EXP gain +15%</span>';
 item.skl3a.stype = 4; item.skl3a.data.time=HOUR*14;
 item.skl3a.use = function(){if(canRead()){if(this.data.timep>=this.cmax){
-  this.amount--;  giveSkExp(skl.axc,150); skl.axc.p+=.05; this.data.read=false; this.data.finished=true; giveItem(item.bookgen)
+  this.amount--;  giveSkExp(skl.axc,150); skl.axc.p+=.15; this.data.read=false; this.data.finished=true; giveItem(item.bookgen)
 
 }else chss.trd.sl(this);}
 }
@@ -5603,9 +5610,9 @@ function Eqp(){
   this.dpmax = 15;
   this.eff=[];
   this.data={dscv:false};
-  this.cls=[0,0,0]; // edge, pierce, blunt
+  this.cls=[0,0,0]; // edge, pierce, blunt 
   //this.ccls=[0,0,0];
-  this.aff = [0,0,0,0,0,0,0]; //p, a, e, f, w, l, d
+  this.aff = [0,0,0,0,0,0,0]; //physical, air, earth, fire, water, light, dark
   //this.caff = [0,0,0,0,0,0,0];
   //this.maff=[0,0,0,0,0,0,0];
   //this.cmaff=[0,0,0,0,0,0,0];
@@ -6836,8 +6843,8 @@ acc.bdl1.name = 'Bone Doll';
 acc.bdl1.desc = 'A small doll carved from beast bone. It\'s a charm that protects the wearer from evil'+dom.dseparator+'<span style="color:thistle;text-shadow:blueviolet 0px 0px 5px">Dark RES +5</span><br><span style="color:royalblue;text-shadow:blueviolet 0px 0px 5px">Evil Class DEF +5</span>';
 acc.bdl1.slot = 8;
 acc.bdl1.stype = 3;
-acc.bdl1.oneq=function(){you.caff[6]+=5;you.cmaff[3]+=5}
-acc.bdl1.onuneq=function(){you.caff[6]-=5;you.cmaff[3]-=5;}
+acc.bdl1.oneq=function(){you.caff[6]+=5;you.aff[6]+=5}
+acc.bdl1.onuneq=function(){you.caff[6]-=5;you.aff[6]-=5;} 
 acc.bdl1.onGet=function(){if(acc.sdl1.have&&acc.wdl1.have) {giveRcp(rcp.gdl1); this.onGet=function(){}}}
 
 acc.fssn = new Eqp(); acc.fssn.id = 40042;
@@ -7469,9 +7476,9 @@ creature.bat.exp = 8;   //exp, dependent on level
 creature.bat.hp_r = 39;  //hp at level 1, is only affected by per-level stats.
 creature.bat.blood = .0852;
 creature.bat.stat_p=[.5,1,1.5,.5];   // stats per level
-creature.bat.aff = [-5,25,-5,-5,10,-5,5];  //elemental defense     physical air earth fire water light dark
+creature.bat.aff = [-5,25,-5,-5,10,-5,5];  //elemental defense     physical air earth fire water light dark 
 creature.bat.cls = [-4,-7,-3];          // Edge, Pierce, blunt, defense
-creature.bat.eqp[0].aff = [0,12,-10,0,0,-5,5];  //elemental offense
+creature.bat.eqp[0].aff = [0,12,-10,0,0,-5,5];  //elemental offense (works correct with defensive items, but it takes the game a few dozen ticks to update the new values??? Weird.)
 creature.bat.eqp[0].cls = [1,1,0];   //e,p,b, offense
 creature.bat.atype = 1; creature.bat.ctype = 1;
 creature.bat.str_r = 2; //stats at level 1
@@ -11547,6 +11554,15 @@ function Chs(){
 //area.area5c.pop = [{crt:creature.frostpixie,lvlmin:1,lvlmax:3,c:1}];
 //area.area5c.size = 10; z_bake(area.area5c);
 //area.area5c.onEnd = function(){ smove(chss.area5,false)}
+
+// adding items drops
+//area.frstn9a1.onEnd = function(){
+//  roll(item.acrn,.2,1,5);  roll(item.mshr,.35,1,3);
+//  roll(wpn.stk1,.15); roll(item.sbone,.3,1,3);  roll(item.wdc,1,5,17); roll(item.appl,.25,2,5); roll(wpn.axer,1); roll(item.pcn,.5,1,3); 
+//  this.size=rand(20)+40; smove(chss.frstn3main)
+//}; area.frstn9a1.drop=[{item:item.hrb1,c:.03},{item:item.wdc,c:.06}]
+//or
+//area.frstn1a4.drop=[{item:item.cp,c:.006},{item:wpn.stk1,c:.0009},{item:wpn.axer,c:.001},{item:item.sbone,c:.0005}]
 
 chss.t1 = new Chs(); chss.t1.id = 101; 
 chss.t1.sl=function(){ global.lst_loc = 101; global.flags.inside=true; d_loc('Dojo, training area');
